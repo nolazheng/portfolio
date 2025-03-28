@@ -1,232 +1,710 @@
 <!DOCTYPE html>
-<!--
-	Astral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<html lang="en">
   <head>
-    <title>Nola's Portfolio</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nola - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="images/favicon/apple-touch-icon.png"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
     />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="images/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="images/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="images/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript
-      ><link rel="stylesheet" href="assets/css/noscript.css"
-    /></noscript>
+    <style>
+      :root {
+        --bg-primary: #0a192f;
+        --text-primary: #e6f1ff;
+        --accent-primary: #64ffda;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+      }
+      .hero-bg {
+        background: radial-gradient(
+          ellipse at bottom,
+          #1b2735 0%,
+          #090a0f 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(#ffffff 1px, transparent 1px),
+          radial-gradient(#ffffff 1px, transparent 1px);
+        background-size: 50px 50px;
+        background-position: 0 0, 25px 25px;
+        opacity: 0.05;
+      }
+      .project-card {
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        will-change: transform, box-shadow;
+      }
+      .project-card:hover {
+        transform: translateY(-10px) rotate(1deg);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15),
+          0 10px 10px rgba(0, 0, 0, 0.12);
+      }
+      .tech-tag {
+        transition: all 0.2s ease;
+        cursor: default;
+      }
+      .tech-tag:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+      }
+      .floating-element {
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      .glitch-text {
+        position: relative;
+        color: var(--text-primary);
+      }
+      .glitch-text::before,
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.7;
+      }
+      .glitch-text::before {
+        left: 2px;
+        text-shadow: -2px 0 red;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+      }
+      .glitch-text::after {
+        left: -2px;
+        text-shadow: -2px 0 blue;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim2 5s infinite linear alternate-reverse;
+      }
+      @keyframes glitch-anim {
+        0% {
+          clip: rect(61px, 9999px, 52px, 0);
+        }
+        5% {
+          clip: rect(33px, 9999px, 33px, 0);
+        }
+        10% {
+          clip: rect(66px, 9999px, 3px, 0);
+        }
+        15% {
+          clip: rect(21px, 9999px, 33px, 0);
+        }
+        20% {
+          clip: rect(91px, 9999px, 63px, 0);
+        }
+        25% {
+          clip: rect(96px, 9999px, 49px, 0);
+        }
+        30% {
+          clip: rect(46px, 9999px, 22px, 0);
+        }
+        35% {
+          clip: rect(96px, 9999px, 33px, 0);
+        }
+        40% {
+          clip: rect(51px, 9999px, 44px, 0);
+        }
+        45% {
+          clip: rect(81px, 9999px, 63px, 0);
+        }
+        50% {
+          clip: rect(61px, 9999px, 22px, 0);
+        }
+        55% {
+          clip: rect(46px, 9999px, 33px, 0);
+        }
+        60% {
+          clip: rect(21px, 9999px, 81px, 0);
+        }
+        65% {
+          clip: rect(56px, 9999px, 15px, 0);
+        }
+        70% {
+          clip: rect(36px, 9999px, 96px, 0);
+        }
+        75% {
+          clip: rect(16px, 9999px, 36px, 0);
+        }
+        80% {
+          clip: rect(96px, 9999px, 66px, 0);
+        }
+        85% {
+          clip: rect(6px, 9999px, 66px, 0);
+        }
+        90% {
+          clip: rect(86px, 9999px, 3px, 0);
+        }
+        95% {
+          clip: rect(26px, 9999px, 33px, 0);
+        }
+        100% {
+          clip: rect(76px, 9999px, 86px, 0);
+        }
+      }
+      @keyframes glitch-anim2 {
+        0% {
+          clip: rect(29px, 9999px, 44px, 0);
+        }
+        5% {
+          clip: rect(6px, 9999px, 29px, 0);
+        }
+        10% {
+          clip: rect(86px, 9999px, 66px, 0);
+        }
+        15% {
+          clip: rect(96px, 9999px, 66px, 0);
+        }
+        20% {
+          clip: rect(76px, 9999px, 56px, 0);
+        }
+        25% {
+          clip: rect(66px, 9999px, 16px, 0);
+        }
+        30% {
+          clip: rect(36px, 9999px, 96px, 0);
+        }
+        35% {
+          clip: rect(6px, 9999px, 46px, 0);
+        }
+        40% {
+          clip: rect(26px, 9999px, 56px, 0);
+        }
+        45% {
+          clip: rect(36px, 9999px, 36px, 0);
+        }
+        50% {
+          clip: rect(86px, 9999px, 76px, 0);
+        }
+        55% {
+          clip: rect(16px, 9999px, 36px, 0);
+        }
+        60% {
+          clip: rect(46px, 9999px, 66px, 0);
+        }
+        65% {
+          clip: rect(76px, 9999px, 16px, 0);
+        }
+        70% {
+          clip: rect(56px, 9999px, 36px, 0);
+        }
+        75% {
+          clip: rect(26px, 9999px, 76px, 0);
+        }
+        80% {
+          clip: rect(46px, 9999px, 66px, 0);
+        }
+        85% {
+          clip: rect(76px, 9999px, 56px, 0);
+        }
+        90% {
+          clip: rect(16px, 9999px, 36px, 0);
+        }
+        95% {
+          clip: rect(36px, 9999px, 66px, 0);
+        }
+        100% {
+          clip: rect(6px, 9999px, 46px, 0);
+        }
+      }
+    </style>
   </head>
-  <body class="is-preload">
-    <!-- Wrapper-->
-    <div id="wrapper">
-      <!-- Nav -->
-      <nav id="nav">
-        <a href="#" class="icon solid fa-home"><span>Home</span></a>
-        <a href="#work" class="icon solid fa-folder"><span>Work</span></a>
-        <!-- <a href="#contact" class="icon solid fa-envelope"
-          ><span>Contact</span></a
-        > -->
-        <a
-          href="https://github.com/nolazheng"
-          target="_blank"
-          class="icon brands fa-github"
-          ><span>Github</span></a
-        >
-        <a
-          href="https://www.linkedin.com/in/nolazheng"
-          target="_blank"
-          class="icon brands fa-linkedin"
-          ><span>Linkedin</span></a
-        >
-      </nav>
+  <body class="bg-[#0a192f] text-[#e6f1ff] font-sans">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 bg-[#112240]/80 backdrop-blur-md z-50 shadow-lg"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold glitch-text" data-text="Nola Zheng">
+          Nola Zheng
+        </div>
+        <div class="space-x-6">
+          <a
+            href="#about"
+            class="text-[#64ffda] hover:text-opacity-80 transition-all"
+            >About</a
+          >
+          <a
+            href="#projects"
+            class="text-[#64ffda] hover:text-opacity-80 transition-all"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="text-[#64ffda] hover:text-opacity-80 transition-all"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
 
-      <!-- Main -->
-      <div id="main">
-        <!-- Me -->
-        <article id="home" class="panel intro">
-          <header>
-            <h1>Nola Zheng</h1>
-            <p>Frontend Engineer</p>
-          </header>
-          <a href="#work" class="jumplink pic">
-            <span class="arrow icon solid fa-chevron-right"
-              ><span>See my work</span></span
-            >
-            <img src="images/me.jpg" alt="" />
+    <!-- Hero Section -->
+    <header
+      class="hero-bg h-screen flex items-center justify-center text-center relative overflow-hidden"
+    >
+      <div class="max-w-4xl mx-auto px-4 z-10 animate-fade-in-up">
+        <h1
+          class="text-6xl font-bold mb-4 text-[#64ffda] glitch-text"
+          data-text="Hello, I'm Nola Zheng"
+        >
+          Hello, I'm Nola Zheng
+        </h1>
+        <p class="text-2xl mb-8 text-[#8892b0] floating-element">
+          Frontend Engineer | Software Engineer
+        </p>
+        <div class="space-x-4">
+          <a
+            href="#projects"
+            class="bg-transparent border-2 border-[#64ffda] text-[#64ffda] px-6 py-3 rounded-md hover:bg-[#64ffda]/10 transition-all"
+          >
+            View Projects
           </a>
-        </article>
+          <a
+            href="#contact"
+            class="bg-[#64ffda] text-[#0a192f] px-6 py-3 rounded-md hover:opacity-90 transition-all"
+          >
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </header>
 
-        <!-- Work -->
-        <article id="work" class="panel">
-          <header>
-            <h2>Work</h2>
-          </header>
-          <p>
-            Here are the projects I have worked on. If you have any thoughts or
-            feedback on the project, please feel free to contact me. I would
-            greatly appreciate hearing from you.
-          </p>
-          <section>
-            <div class="row">
-              <div class="col-4 col-6-medium col-12-small">
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-[#112240]">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[#64ffda]">
+          My Projects
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Project the-wild-oasis -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/wild-oasis.webp"
+              alt="the-wild-oasis"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">
+                The Wild Oasis
+              </h3>
+              <p class="text-[#8892b0] mb-4">the-wild-oasis hotel website</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Next.js</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >supabase</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >tailwind.css</span
+                >
+              </div>
+              <div class="flex space-x-4">
+                <a
+                  href="https://the-wild-oasis-one-ruddy.vercel.app/"
+                  target="_blank"
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/nolazheng/the-wild-oasis"
+                  target="_blank"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project the-wild-oasis-cms -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/dashboard.png"
+              alt="Project the-wild-oasis-cms"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">
+                The Wild Oasis CMS
+              </h3>
+              <p class="text-[#8892b0] mb-4">
+                a web app for hotel to manage booking details
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >React</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >react-query</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >recharts</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >styled-components</span
+                >
+              </div>
+              <div class="flex space-x-4">
+                <a
+                  href="https://the-wild-oasis-cms.vercel.app/"
+                  target="_blank"
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/nolazheng/the-wild-oasis-cms"
+                  target="_blank"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project natours -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/natours.png"
+              alt="natours"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">Natours API</h3>
+              <p class="text-[#8892b0] mb-4">
+                a modern tour booking REST API with Express and MongoDB
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Node.js</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >express</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >mongoose</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >pug</span
+                >
+              </div>
+              <div class="flex space-x-4">
+                <!-- <a
+                  href="https://the-wild-oasis-one-ruddy.vercel.app/"
+                  target="_blank"
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a> -->
+                <a
+                  href="https://github.com/nolazheng/natours-api"
+                  target="_blank"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 1 -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/df.png"
+              alt="Project 1"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">
+                Delta Force Garena
+              </h3>
+              <p class="text-[#8892b0] mb-4">Official Website</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Nuxt</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >pinia</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >sentry</span
+                >
+              </div>
+              <div class="flex space-x-4">
                 <a
                   href="https://df.garena.com/zh_tw/?redirect=0"
                   target="_blank"
-                  class="image fit"
-                  ><img src="images/df.png" alt=""
-                /></a>
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <!-- <a
+                 href="#"
+                 class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+               >
+                 <i class="fab fa-github mr-2"></i>GitHub
+               </a> -->
               </div>
-              <div class="col-4 col-6-medium col-12-small">
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/car.png"
+              alt="Project 2"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">
+                Need For Speed Mobile
+              </h3>
+              <p class="text-[#8892b0] mb-4">Official Website</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Nuxt</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >pinia</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >sentry</span
+                >
+              </div>
+              <div class="flex space-x-4">
                 <a
                   href="https://nfsm.garena.tw/?redirect=0"
                   target="_blank"
-                  class="image fit"
-                  ><img src="images/car.png" alt=""
-                /></a>
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <!-- <a
+                 href="#"
+                 class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+               >
+                 <i class="fab fa-github mr-2"></i>GitHub
+               </a> -->
               </div>
-              <div class="col-4 col-6-medium col-12-small">
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="https://www.moodii.io/img/animated.png"
+              alt="Project 3"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">Moodii</h3>
+              <p class="text-[#8892b0] mb-4">Social App</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >React Native</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >FFmpeg</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Xcode</span
+                >
+              </div>
+              <div class="flex space-x-4">
                 <a
-                  href="https://www.moodii.io/index.html"
+                  href="https://apps.apple.com/tw/app/moodii-%E5%BF%83%E6%83%85%E7%A4%BE%E4%BA%A4%E8%BB%9F%E9%AB%94-%E6%9C%80%E6%9C%89%E6%BA%AB%E5%BA%A6%E7%9A%84%E5%B9%B3%E5%8F%B0/id1521782760"
                   target="_blank"
-                  class="image fit"
-                  ><img src="https://www.moodii.io/img/animated.png" alt=""
-                /></a>
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <!-- <a
+                  href="#"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a> -->
               </div>
-              <div class="col-4 col-6-medium col-12-small">
+            </div>
+          </div>
+          <!-- Project 4 -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/forittle.png"
+              alt="Project 4"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">Forittle</h3>
+              <p class="text-[#8892b0] mb-4">Web App</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Vue</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >Firebase</span
+                >
+              </div>
+              <div class="flex space-x-4">
                 <a
-                  href="https://nolazheng.github.io/Forittle/"
+                  href="https://forittle.web.app/"
                   target="_blank"
-                  class="image fit"
-                  ><img src="images/forittle.png" alt=""
-                /></a>
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/nolazheng/Forittle"
+                  target="_blank"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a>
               </div>
-              <div class="col-4 col-6-medium col-12-small">
+            </div>
+          </div>
+          <!-- Project 5 -->
+          <div
+            class="bg-[#0a192f] rounded-xl shadow-2xl project-card border border-[#233554] overflow-hidden"
+          >
+            <img
+              src="images/pixel-canvas.png"
+              alt="Project 5"
+              class="w-full h-48 object-cover filter brightness-75 hover:brightness-100 transition-all"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-[#64ffda]">
+                Pixel Canvas
+              </h3>
+              <p class="text-[#8892b0] mb-4">
+                Draw a pixel image online and download it!
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >html</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >css</span
+                >
+                <span
+                  class="bg-[#112240] text-[#64ffda] px-2 py-1 rounded-full text-xs tech-tag"
+                  >js</span
+                >
+              </div>
+              <div class="flex space-x-4">
                 <a
                   href="https://codepen.io/garena-tw-eng/pen/bGxoRZR"
                   target="_blank"
-                  class="image fit"
-                  ><img src="images/pixel-canvas.png" alt=""
-                /></a>
-              </div>
-              <!-- <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic04.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic05.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic06.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic07.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic08.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic09.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic10.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic11.jpg" alt=""
-                /></a>
-              </div>
-              <div class="col-4 col-6-medium col-12-small">
-                <a href="#" class="image fit"
-                  ><img src="images/pic12.jpg" alt=""
-                /></a>
-              </div> -->
-            </div>
-          </section>
-        </article>
-
-        <!-- Contact -->
-        <!-- <article id="contact" class="panel">
-          <header>
-            <h2>Contact Me</h2>
-          </header>
-          <form
-            action="mailto:someone@example.com"
-            method="post"
-            enctype="text/plain"
-          >
-            <div>
-              <div class="row">
-                <div class="col-6 col-12-medium">
-                  <input type="text" name="name" placeholder="Name" />
-                </div>
-                <div class="col-6 col-12-medium">
-                  <input type="text" name="email" placeholder="Email" />
-                </div>
-                <div class="col-12">
-                  <input type="text" name="subject" placeholder="Subject" />
-                </div>
-                <div class="col-12">
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    rows="6"
-                  ></textarea>
-                </div>
-                <div class="col-12">
-                  <input type="submit" value="Send Message" />
-                </div>
+                  class="bg-[#64ffda] text-[#0a192f] px-4 py-2 rounded-md hover:opacity-90 transition-all"
+                >
+                  View Project
+                </a>
+                <!-- <a
+                  href="#"
+                  class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md hover:bg-[#64ffda]/10 transition-all"
+                >
+                  <i class="fab fa-github mr-2"></i>GitHub
+                </a> -->
               </div>
             </div>
-          </form>
-        </article> -->
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- Footer -->
-      <div id="footer">
-        <ul class="copyright">
-          <li>&copy; nolazheng</li>
-          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        </ul>
+    <!-- Added simple contact section to match the design -->
+    <section id="contact" class="py-16 bg-[#0a192f]">
+      <div class="max-w-md mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-8 text-[#64ffda]">Get In Touch</h2>
+        <p class="text-[#8892b0] mb-8">
+          Interested in collaborating or have a project in mind? Drop me a
+          message!
+        </p>
+        <a
+          href="mailto:mania001988@example.com"
+          class="bg-transparent border-2 border-[#64ffda] text-[#64ffda] px-8 py-4 rounded-md hover:bg-[#64ffda]/10 transition-all inline-block"
+        >
+          Say Hello
+        </a>
       </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    </section>
   </body>
 </html>
